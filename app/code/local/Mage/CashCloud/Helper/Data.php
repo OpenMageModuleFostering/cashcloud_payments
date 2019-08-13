@@ -124,7 +124,7 @@ class Mage_CashCloud_Helper_Data extends Mage_Core_Helper_Data
             $actionId = \CashCloud\Api\Rest\Client::CURRENCY_RECEIVE;
             if(isset($rate->{$currencyId}->{$actionId})) {
                 // cents
-                return (float) ($rate->{$currencyId}->{$actionId} / 100);
+                return (float) ($rate->{$currencyId}->{$actionId});
             }
         } catch (CashCloudException $e) {
             Mage::logException($e);
@@ -150,9 +150,11 @@ class Mage_CashCloud_Helper_Data extends Mage_Core_Helper_Data
     public function refund($transactionId, $amount, $remark = "no remark")
     {
         try {
+            $order = $this->loadOrderByHash($transactionId);
             $refund = new \CashCloud\Api\Method\Refund();
             $refund->setHash($transactionId);
             $refund->setAmount($amount * 100);
+            $refund->setExternalData($order->getIncrementId());
             $refund->setRemark($remark);
             $refund->perform($this->getClient());
         } catch (\CashCloud\Api\Exception\CashCloudException $e) {
@@ -161,7 +163,36 @@ class Mage_CashCloud_Helper_Data extends Mage_Core_Helper_Data
 
         return $this;
     }
+    /**
+     * @param $hash
+     * @return Mage_Sales_Model_Order
+     */
+    public function loadOrderByHash($hash)
+    {
+        /** @var Mage_Sales_Model_Order_Payment $orderPayment */
+        $orderPayment = Mage::getSingleton("sales/order_payment")->load($hash, 'cashcloud_id');
+        /** @var Mage_Sales_Model_Order $order */
+        $order = Mage::getSingleton("sales/order")->load($orderPayment->getParentId());
+        if($order)
+        {
 
+        } else {
+            Mage::throwException($this->getHelper()->__("Order not found!"));
+        }
+        return $order;
+    }
+    public function getTransactionDataFromHash($hash)
+	{
+        try{
+            $request = new \CashCloud\Api\Method\GetTransactions();
+            $request->setHash($hash);
+            $result = $request->perform($this->getClient());
+            return $result->transaction;
+        } catch (\CashCloud\Api\Exception\CashCloudException $e) {
+
+        }
+        return false;
+	}
     /**
      * @param string $key
      * @return false|mixed

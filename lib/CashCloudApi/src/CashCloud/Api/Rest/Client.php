@@ -40,7 +40,7 @@ class Client
     /**
      * @var string
      */
-    private $apiUrl = 'https://merchant.api.cashcloud.com/';
+    private $apiUrl = 'https://merchant-api.cashcloud.com/';
 
     /**
      * @var bool

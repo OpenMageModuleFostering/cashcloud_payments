@@ -4,12 +4,12 @@
         <payment>
             <groups>
                 <cashcloud translate="label" module="paygate">
-                    <label>CashCloud</label>
+                    <label>cashcloud</label>
                     <sort_order>670</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>0</show_in_store>
-                    <comment>Please enter your CashCloud account details</comment>
+                    <comment>Please enter your cashcloud account details</comment>
                     <fields>
                         <active translate="label">
                             <label>Enabled</label>

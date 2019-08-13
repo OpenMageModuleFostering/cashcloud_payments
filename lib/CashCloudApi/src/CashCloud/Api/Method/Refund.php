@@ -9,6 +9,9 @@ use CashCloud\Api\Rest\Request;
  */
 class Refund extends Method
 {
+    const REFUND_ACCEPTED_STATUS = 3;
+	const REFUND_CANCELLED_STATUS = 5;
+
     /**
      * @var string
      */
@@ -21,10 +24,20 @@ class Refund extends Method
      * @var string
      */
     protected $remark;
-
+    /**
+     * @var string
+     */
+    protected $externalId;
+    /**
+     * @var string
+     */
+    protected $externalReference;
+    /**
+     * @var string
+     */
+    protected $externalDescription;
     /**
      * Return method URL
-     *
      * @param \CashCloud\Api\Rest\Client $api
      * @return string
      */
@@ -34,8 +47,6 @@ class Refund extends Method
     }
 
     /**
-     * Return request method
-     *
      * @return string
      */
     public function getMethod()
@@ -46,7 +57,6 @@ class Refund extends Method
 
     /**
      * Return method data
-     *
      * @return array
      */
     public function getData()
@@ -55,12 +65,13 @@ class Refund extends Method
             'hash'=>$this->hash,
             'amount'=>$this->amount,
             'remark'=>$this->remark,
+            'extern[id]'=> $this->externalId,
+            'extern[reference]'     => $this->externalReference,
+            'extern[description]'   => $this->externalDescription
         );
     }
 
     /**
-     * Formats response
-     *
      * @param Request $request
      * @return array
      */
@@ -70,8 +81,6 @@ class Refund extends Method
     }
 
     /**
-     * Returns cashcloud hash
-     *
      * @return string
      */
     public function getHash()
@@ -80,8 +89,6 @@ class Refund extends Method
     }
 
     /**
-     * Sets cashcloud hash
-     *
      * @param string $hash
      */
     public function setHash($hash)
@@ -90,8 +97,6 @@ class Refund extends Method
     }
 
     /**
-     * Returns amount in euro cents
-     *
      * @return int
      */
     public function getAmount()
@@ -100,8 +105,6 @@ class Refund extends Method
     }
 
     /**
-     * Sets amount in euro cents
-     *
      * @param int $amount
      */
     public function setAmount($amount)
@@ -110,8 +113,6 @@ class Refund extends Method
     }
 
     /**
-     * Returns order remark
-     *
      * @return string
      */
     public function getRemark()
@@ -120,12 +121,17 @@ class Refund extends Method
     }
 
     /**
-     * Sets order remark
-     *
      * @param string $remark
      */
     public function setRemark($remark)
     {
         $this->remark = $remark;
+    }
+
+    public function setExternalData($id, $reference = null, $description = null)
+    {
+        $this->externalId = $id;
+        $this->externalReference = $reference;
+        $this->externalDescription = $description;
     }
 }

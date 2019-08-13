@@ -6,7 +6,13 @@
 <div id="payment_form_<?php echo $this->getMethodCode() ?>" style="display: none">
     <ul class="form-list">
         <li>
-            <label for="cashcloud_username" class="required"><em>*</em> Username</label>
+             <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) ?>/skin/frontend/base/default/images/cashcloud/logo.png" alt="Cashcloud"/>
+        </li>
+         <li>
+            <label for="cashcloud_description"><?php echo $this->__("cashcloud.description"); ?></label>
+        </li>
+        <li>
+            <label for="cashcloud_username" class="required"><em>*</em><?php echo $this->__("Username")?></label>
 
             <div class="input-box">
                 <input type="text" name="payment[cashcloud_username]" id="cashcloud_username" class="input-text required-entry"/>
@@ -14,7 +20,7 @@
         </li>
         <?php if (!$this->isReasonSelected()) { ?>
         <li>
-            <label for="cashcloud_reason_id" class="required"><em>*</em> Reason</label>
+            <label for="cashcloud_reason_id" class="required"><em>*</em><?php echo $this->__("Reason")?></label>
 
             <div class="input-box">
                 <select name="payment[cashcloud_reason_id]" id="cashcloud_reason_id">
@@ -27,7 +33,7 @@
         <?php } ?>
         <?php if ($this->isCCREnabled()) { ?>
             <li>
-                <label for="cashcloud_currency" class="required"><em>*</em> Currency</label>
+                <label for="cashcloud_currency" class="required"><em>*</em><?php echo $this->__("Currency")?></label>
             </li>
             <li class="control">
                 <input type="radio" name="payment[cashcloud_currency]" id="cashcloud_currency_eur" value="EUR" class="radio validation-passed" checked/>

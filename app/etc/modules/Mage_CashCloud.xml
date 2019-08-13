@@ -6,7 +6,7 @@
             <depends>
                 <Mage_Payment />
             </depends>
-            <version>0.0.1</version>
+            <version>{{extension.version}}</version>
         </Mage_CashCloud>
     </modules>
 </config>

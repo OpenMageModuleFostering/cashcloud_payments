@@ -172,15 +172,15 @@ class RequestMoney extends Method
     public function perform(Client $api)
     {
         if($this->getAmount() <= 0) {
-            throw new CashCloudException("Invalid amount!");
+            throw new CashCloudException("currency.invalidAmount");
         }
 
         if(is_null($this->getCurrency())) {
-            throw new CashCloudException("Invalid currency!");
+            throw new CashCloudException("currency.invalid");
         }
 
         if(empty($this->email)) {
-            throw new CashCloudException("Invalid email!");
+            throw new CashCloudException("email.missing");
         }
 
 

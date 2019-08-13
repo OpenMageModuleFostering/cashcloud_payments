@@ -1,11 +1,9 @@
 {
     "name": "OpenMageModuleFostering/cashcloud_payments",
     "type": "magento-module",
-    "license": "
-----Creative-Commons-Attribution-4.0-International
-----License",
+    "license": "Creative-Commons-Attribution-4.0-International-License",
     "homepage": "",
-    "description": "CashCloud payments",
+    "description": "Cashcloud Payments",
     "authors": [
     {
         "name": "cashcloud",

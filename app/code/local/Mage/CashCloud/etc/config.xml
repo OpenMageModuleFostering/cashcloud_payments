@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Mage_CashCloud>
-            <version>0.0.1</version>
+            <version>0.2.0</version>
         </Mage_CashCloud>
     </modules>
 
@@ -75,7 +75,7 @@
                 <order_status_after_payment>processing</order_status_after_payment>
                 <auto_set_settings>1</auto_set_settings>
                 <device_id>magento</device_id>
-                <title>CashCloud</title>
+                <title>cashcloud</title>
             </cashcloud>
         </payment>
     </default>

@@ -48,6 +48,10 @@ class Mage_CashCloud_PayController extends Mage_Core_Controller_Front_Action
     public function callbackAction()
     {
         $method = isset($_POST['method']) ? $_POST['method'] : false;
+        if($method == "refund") {
+            $this->getMethodInstance()->validateRefundCallback($_POST['hash']);
+            exit();
+        }
         $securityToken = isset($_POST['control']) ? $_POST['control'] : false;
         $time = isset($_POST['time']) ? $_POST['time'] : false;
         $status = isset($_POST['status']) ? $_POST['status'] : false;
@@ -59,10 +63,6 @@ class Mage_CashCloud_PayController extends Mage_Core_Controller_Front_Action
 
         if($securityToken != $realToken) {
             Mage::throwException("Not found");
-        }
-
-        if($method == "refund") {
-            Mage::throwException("Method not supported");
         }
 
         $hash = isset($_POST['hash']) ? $_POST['hash'] : false;

@@ -18,9 +18,10 @@ class Mage_CashCloud_Model_PaymentMethod extends Mage_Payment_Model_Method_Abstr
     /**
      * Availability options
      */
-    protected $_canCapture = true;
-    protected $_isGateway = false;
-
+    protected $_canCapture                  = true;
+    protected $_isGateway                   = false;
+    protected $_canCapturePartial           = true;
+    protected $_canRefundInvoicePartial     = true;
     /**
      * @param Varien_Object $payment
      * @param float $amount
@@ -95,7 +96,7 @@ class Mage_CashCloud_Model_PaymentMethod extends Mage_Payment_Model_Method_Abstr
         $username = $info->getAdditionalInformation("cashcloud_username");
         if (!preg_match('/([\w-+\.]+)@((?:[\w]+\.)+)([a-zA-Z]{2,4})/', $username)) {
             Mage::throwException(
-                $this->_getHelper()->__('Invalid CashCloud username')
+                $this->_getHelper()->__('Invalid cashcloud username')
             );
         }
 
@@ -180,12 +181,12 @@ class Mage_CashCloud_Model_PaymentMethod extends Mage_Payment_Model_Method_Abstr
             );
         } catch (\CashCloud\Api\Exception\AuthException $e) {
             Mage::throwException(
-                $this->_getHelper()->__("Error while authorizing payment. Please check CashCloud account details in configuration!")
+                $this->_getHelper()->__("Error while authorizing payment. Please check cashcloud account details in configuration!")
             );
         } catch (\CashCloud\Api\Exception\CashCloudException $e) {
             Mage::logException($e);
             Mage::throwException(
-                $this->_getHelper()->__("Error while executing payment in CashCloud!")
+                $this->_getHelper()->__("Error while executing payment in cashcloud!")
             );
         }
 
@@ -227,6 +228,79 @@ class Mage_CashCloud_Model_PaymentMethod extends Mage_Payment_Model_Method_Abstr
 
     /**
      * @param Mage_Sales_Model_Order $order
+     * @param array $callbackData
+     */
+    public function validateRefundCallback($hash)
+    {
+        $this->getHelper()->init();
+        $transaction = $this->getHelper()->getTransactionDataFromHash($hash);
+        $order_id = $transaction->extern->id;
+		$status = (int)$transaction->transaction_state_id;
+
+        $order = Mage::getModel('sales/order')->loadByIncrementId($order_id);
+        $credit_memo = $order->getCreditmemosCollection()->getLastItem();
+        if($status == \CashCloud\Api\Method\Refund::REFUND_ACCEPTED_STATUS)
+        {
+            $orderState = Mage_Sales_Model_Order::STATE_CLOSED;
+            $orderStatus = $this->getConfigData('order_status_after_payment');
+            $this->saveStatus($order, $orderState, $orderStatus, $this->getHelper()->__("Refund accepted by user"));
+
+        }
+        if($status == \CashCloud\Api\Method\Refund::REFUND_CANCELLED_STATUS)
+        {
+            $credit_memo->cancel()->save();
+            $this->cancelOrderRefundAction($order);
+            $orderState = Mage_Sales_Model_Order::STATE_COMPLETE;
+            $orderStatus = $this->getConfigData('order_status_after_payment');
+            $this->saveStatus($order, $orderState, $orderStatus, $this->getHelper()->__("Refund cancelled by user"));
+        }
+    }
+    /*
+     *Deletes order refund information
+     */
+    public function cancelOrderRefundAction($order)
+    {
+        foreach($order->getItemsCollection() as $item)
+        {
+            if ($item->getQtyRefunded() > 0)
+            {
+                $item->setQtyRefunded(0)
+                ->setAmountRefunded(0)
+                ->setBaseAmountRefunded(0)
+                ->setHiddenTaxRefunded(0)
+                ->setBaseHiddenTaxRefunded(0)
+                ->setTaxRefunded(0)
+                ->setBaseTaxRefunded(0)
+                ->setDiscountRefunded(0)
+                ->setBaseDiscountRefunded(0)
+                ->save();
+            }
+        }
+
+        $order
+            ->setBaseDiscountRefunded(0)
+            ->setBaseShippingRefunded(0)
+            ->setBaseSubtotalRefunded(0)
+            ->setBaseTaxRefunded(0)
+            ->setBaseShippingTaxRefunded(0)
+            ->setBaseTotalOnlineRefunded(0)
+            ->setBaseTotalOfflineRefunded(0)
+            ->setBaseTotalRefunded(0)
+            ->setTotalOnlineRefunded(0)
+            ->setTotalOfflineRefunded(0)
+            ->setDiscountRefunded(0)
+            ->setShippingRefunded(0)
+            ->setShippingTaxRefunded(0)
+            ->setSubtotalRefunded(0)
+            ->setTaxRefunded(0)
+            ->setTotalRefunded(0)
+            ->save();
+
+        $invoice = $order->getInvoiceCollection()->getLastItem();
+        $invoice->setIsUsedForRefund(0)->save();
+    }
+    /**
+     * @param Mage_Sales_Model_Order $order
      * @param string $orderState
      * @param string $orderStatus
      * @param string $comment
@@ -242,12 +316,5 @@ class Mage_CashCloud_Model_PaymentMethod extends Mage_Payment_Model_Method_Abstr
         } else {
 
         }
-
-
-//        var_dump($order->getData(), $payment->getData()); die();
-        /** @var Mage_Sales_Model_Order_Status_History $comment */
-//
-//
-//        $comment->save();
     }
 }

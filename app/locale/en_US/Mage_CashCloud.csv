@@ -7,6 +7,7 @@
 "isCompanyApproved","Company not approved"
 "isReasonAvailable","Reason not selected"
 "email.emailDomain","Email is not correct"
-"recipient.errorStatus","Incorrect recipient status"
+"recipient.errorStatus","You are not allowed to order this product because of your available balance. Please top up your account first."
 "recipient.notFound","Recipient not found"
 "Validation failed: email.emailDomain","Invalid email"
+cashcloud.description,"Cashcloud is your mobile eWallet and payment service. Just pay with your mobile phone. No need to enter card or bank account details. Simply enter your cashcloud username, send payment request and confirm on your mobile phone within the cashcloud APP. How to become cashcloud user? Just download cashcloud from the Apple App Store or Google Play Store and register for free, top up your cashcloud account in your eWallet. Or start at www.cashcloud.com."
