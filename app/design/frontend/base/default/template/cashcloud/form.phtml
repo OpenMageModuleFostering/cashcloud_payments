@@ -1,0 +1,42 @@
+<?php
+/**
+ * @var Mage_CashCloud_Block_Form $this
+ */
+?>
+<div id="payment_form_<?php echo $this->getMethodCode() ?>" style="display: none">
+    <ul class="form-list">
+        <li>
+            <label for="cashcloud_username" class="required"><em>*</em> Username</label>
+
+            <div class="input-box">
+                <input type="text" name="payment[cashcloud_username]" id="cashcloud_username" class="input-text required-entry"/>
+            </div>
+        </li>
+        <?php if (!$this->isReasonSelected()) { ?>
+        <li>
+            <label for="cashcloud_reason_id" class="required"><em>*</em> Reason</label>
+
+            <div class="input-box">
+                <select name="payment[cashcloud_reason_id]" id="cashcloud_reason_id">
+                    <?php foreach ($this->getReasons() as $reasonId => $reasonName) {
+                        echo "<option value='$reasonId'>$reasonName</option>";
+                    } ?>
+                </select>
+            </div>
+        </li>
+        <?php } ?>
+        <?php if ($this->isCCREnabled()) { ?>
+            <li>
+                <label for="cashcloud_currency" class="required"><em>*</em> Currency</label>
+            </li>
+            <li class="control">
+                <input type="radio" name="payment[cashcloud_currency]" id="cashcloud_currency_eur" value="EUR" class="radio validation-passed" checked/>
+                <label for="cashcloud_currency_eur">EUR (<?php echo $this->getPriceInEur() ?>, <?php echo number_format($this->getConversationRate(), 4) ?>)</label>
+            </li>
+            <li class="control">
+                <input type="radio" name="payment[cashcloud_currency]" id="cashcloud_currency_ccr" value="CCR" class="radio validation-passed"/>
+                <label for="cashcloud_currency_ccr">CCR (<?php echo number_format($this->getPriceInCCR(), 2) ?> CCR)</label>
+            </li>
+        <?php } ?>
+    </ul>
+</div>

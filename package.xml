@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<package>
+    <name>cashcloud_payments</name>
+    <version>0.0.2</version>
+    <stability>stable</stability>
+    <license uri="http://creativecommons.org/licenses/by/4.0/">
+    Creative Commons Attribution 4.0 International
+    License</license>
+    <channel>community</channel>
+    <extends />
+    <summary>CashCloud payments</summary>
+    <description>This extension adds CashCloud payment
+    methods</description>
+    <notes>This extension adds CashCloud payment methods</notes>
+    <authors>
+        <author>
+            <name>cashcloud</name>
+            <user>cashcloud</user>
+            <email>olaf.taupitz@cashcloud.com</email>
+        </author>
+    </authors>
+    <date>2014-05-21</date>
+    <time>16:32:14</time>
+    <contents>
+        <target name="magelocal">
+            <dir name="Mage">
+                <dir name="CashCloud">
+                    <dir name="Model">
+                        <dir name="Mysql4">
+                            <file name="Setup.php"
+                            hash="295e6757cc76c40fa261e2ddd3913cd3" />
+                        </dir>
+                        <file name="PaymentMethod.php"
+                        hash="7f970fb0d25c4eb6d8cadc1b97525a1c" />
+                    </dir>
+                    <dir name="Block">
+                        <file name="Process.php"
+                        hash="1ddd06b620ce06c27510dfed0a7c477b" />
+                        <file name="Info.php"
+                        hash="4b22b99be40392e2adb7bdec86b7ad74" />
+                        <file name="Form.php"
+                        hash="d3ef5077816a2f508b3a7da7e80c3c6f" />
+                    </dir>
+                    <dir name="Helper">
+                        <file name="Data.php"
+                        hash="341c8d49beec9f37d97ae7433cad4726" />
+                    </dir>
+                    <dir name="Adminhtml">
+                        <dir name="Model">
+                            <file name="Reason.php"
+                            hash="93265ecf40c4283b00d1eff9abfb09b6" />
+                            <file name="Checks.php"
+                            hash="0927945f60fd1b13f16b55156b8445de" />
+                            <file name="Config.php"
+                            hash="473fad0327a658612816993c22dc0614" />
+                            <file name="Expiration.php"
+                            hash="ee5862cd87523a727b91841364ddc41a" />
+                        </dir>
+                    </dir>
+                    <dir name="controllers">
+                        <file name="PayController.php"
+                        hash="3cff4207fa9bd237dec13dda00a57c69" />
+                    </dir>
+                    <dir name="etc">
+                        <file name="config.xml"
+                        hash="e9c0749a5890f83dd7a4f69e56a36338" />
+                        <file name="system.xml"
+                        hash="67188821ef5177363deab0aa78c37237" />
+                    </dir>
+                    <dir name="sql">
+                        <dir name="cashcloud_setup">
+                            <file name="mysql4-install-0.0.1.php"
+                            hash="50b96b7c003ab0c754f1e128cdab04ad" />
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+        </target>
+        <target name="mageetc">
+            <dir name="modules">
+                <file name="Mage_CashCloud.xml"
+                hash="29b871aff1556810277f8a7b6048f20b" />
+            </dir>
+        </target>
+        <target name="magedesign">
+            <dir name="frontend">
+                <dir name="base">
+                    <dir name="default">
+                        <dir name="template">
+                            <dir name="cashcloud">
+                                <file name="process.phtml"
+                                hash="710854e31bb803b87624f0d837a9c2f7" />
+                                <file name="form.phtml"
+                                hash="f135a08dd235baba859990e95df3f22e" />
+                                <file name="info.phtml"
+                                hash="d00f05fe6004a057beff737d7168d7e4" />
+                            </dir>
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+            <dir name="adminhtml">
+                <dir name="default">
+                    <dir name="default">
+                        <dir name="template">
+                            <dir name="cashcloud">
+                                <file name="checks.phtml"
+                                hash="ce871438d50046b5bf01632287bb113a" />
+                            </dir>
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+        </target>
+        <target name="magelib">
+            <dir name="CashCloudApi">
+                <dir name="samples">
+                    <file name="GetRate.php"
+                    hash="2713be10db66ffd9048a134ae08e925e" />
+                    <file name="SaveSettings.php"
+                    hash="2628c36df7f07f3c4c02b73c3c2608d0" />
+                    <file name="RequestMoney.php"
+                    hash="6ce3c6b1f08e1fe7f86307dae449ce95" />
+                    <file name="credentials.php"
+                    hash="5902bffeb7f9b1218e4b34653a9821e5" />
+                    <file name="GetSettings.php"
+                    hash="bc5890f26445fdc11524c779fa608cf6" />
+                    <file name="GetReasons.php"
+                    hash="f181a8f0c74e1127af87bea42151d6ff" />
+                </dir>
+                <file name="phpunit.xml"
+                hash="84e70fe584254f6aa1377b0f5295cf73" />
+                <dir name="tests">
+                    <file name="bootstrap.php"
+                    hash="d9027f2b29bfb77e1962266d414648b1" />
+                    <dir name="CashCloud">
+                        <dir name="Test">
+                            <dir name="Api">
+                                <dir name="Exception">
+                                    <file name="ValidateExceptionTest.php"
+                                    hash="e10c57f487b08bcae84c394bdf0c30d9" />
+                                </dir>
+                                <dir name="Rest">
+                                    <file name="AuthTest.php"
+                                    hash="de6f4af4bdf395b00ce843a825d38bdb" />
+                                    <file name="CurlRequestTest.php"
+                                    hash="a191b71e687b6aaf0a3384b37e2d64f7" />
+                                    <file name="ClientTest.php"
+                                    hash="e512fb59531809f65b77a4a8f034d690" />
+                                </dir>
+                                <dir name="Method">
+                                    <file name="RequestMoneyTest.php"
+                                    hash="8b83522fc0c55ec19a5effe09c345bf8" />
+                                    <file name="GetReasonsTest.php"
+                                    hash="1b5ad83bf87727c99783da70df3fb9ad" />
+                                    <file name="GetSettingsTest.php"
+                                    hash="62751c64dc3b383b1607aeff27e2e863" />
+                                    <file name="SaveSettingsTest.php"
+                                    hash="f66782fba1fe916c8ec340c6a4e2e593" />
+                                    <file name="GetRatesTest.php"
+                                    hash="221247ea77d858ee5743afded4f81ea1" />
+                                </dir>
+                            </dir>
+                            <file name="TestCase.php"
+                            hash="cc78576f845fb0af58da9d15b59f301f" />
+                        </dir>
+                    </dir>
+                </dir>
+                <dir name="src">
+                    <dir name="CashCloud">
+                        <dir name="Api">
+                            <dir name="Exception">
+                                <file name="ValidateException.php"
+                                hash="0ad42a0a57ef9375eff856d785be4416" />
+                                <file name="AuthException.php"
+                                hash="2e908258e593142961c7f0475b161b03" />
+                                <file name="CashCloudException.php"
+                                hash="99efbf3eb2432500ea1741e546d4936f" />
+                            </dir>
+                            <dir name="Rest">
+                                <file name="Request.php"
+                                hash="bd042d8d659f761401b5e018c9659b56" />
+                                <file name="Auth.php"
+                                hash="eb9b86a654ca9eb18d8e8296aecef053" />
+                                <file name="Client.php"
+                                hash="f38915cb0e063f03c849eb4707b82c05" />
+                                <file name="CurlRequest.php"
+                                hash="5a9a9394dda28cf1ae931a444aec437e" />
+                            </dir>
+                            <dir name="Method">
+                                <file name="SaveSettings.php"
+                                hash="c2b89ab82f46665d7058aefa3805d2a1" />
+                                <file name="Method.php"
+                                hash="ed6fb4b76e6b169f1bde7db4b796a4bb" />
+                                <file name="RequestMoney.php"
+                                hash="4a54c849396d9c925b20e0bc51e780b6" />
+                                <file name="Refund.php"
+                                hash="f220ac262f5f86abd553ca3dafd3b34b" />
+                                <file name="GetTransactions.php"
+                                hash="f04180b23f4247f4e013c721b5a46ded" />
+                                <file name="GetSettings.php"
+                                hash="83bd592acf928f426760a909d68236af" />
+                                <file name="GetRates.php"
+                                hash="91732fcc50ca3a1ab7616223e9ee5e6a" />
+                                <file name="GetReasons.php"
+                                hash="3ff3776c9e0ed05195a362e7aabeaa62" />
+                            </dir>
+                        </dir>
+                    </dir>
+                </dir>
+                <file name="README.md"
+                hash="aab32792745c5d2c37ab89b374dd4679" />
+                <file name="composer.json"
+                hash="f028b4aeea73abffc53d6b3537731848" />
+                <dir name="vendor">
+                    <dir name="composer">
+                        <file name="autoload_psr4.php"
+                        hash="dd3a00f0d13eb29781edd8c77d4c5100" />
+                        <file name="autoload_classmap.php"
+                        hash="8645d3a4e3ad87e7cf4d88a46717aab4" />
+                        <file name="ClassLoader.php"
+                        hash="3adcacc118804f98f1fd888e2575f00a" />
+                        <file name="autoload_namespaces.php"
+                        hash="6ad7d23d00d37b668c1c42aeb4334849" />
+                        <file name="autoload_real.php"
+                        hash="ec07aaf8d8b23827afbc6ba519a6e560" />
+                    </dir>
+                    <file name="autoload.php"
+                    hash="e3f18817dc5427187c7042137ef7fb55" />
+                </dir>
+            </dir>
+        </target>
+        <target name="mageskin">
+            <dir name="frontend">
+                <dir name="base">
+                    <dir name="default">
+                        <dir name="js">
+                            <file name="cashcloud.js"
+                            hash="d41d8cd98f00b204e9800998ecf8427e" />
+                        </dir>
+                        <dir name="css">
+                            <file name="cashcloud.css"
+                            hash="1d4ce0ed49ce6ebeb2bb2f3573bbf4ba" />
+                        </dir>
+                        <dir name="images">
+                            <dir name="cashcloud">
+                                <file name="logo.png"
+                                hash="7b61cdf3b30ecfe0c14f0941748daac9" />
+                                <file name="loader.gif"
+                                hash="b78b8cd94c60b5a6515bfaf5ce974b75" />
+                            </dir>
+                        </dir>
+                    </dir>
+                </dir>
+            </dir>
+        </target>
+        <target name="magelocale">
+            <dir name="en_GB">
+                <file name="Mage_CashCloud.csv"
+                hash="81cc71f688fb48b92b955a7f05ff8a69" />
+            </dir>
+            <dir name="en_US">
+                <file name="Mage_CashCloud.csv"
+                hash="81cc71f688fb48b92b955a7f05ff8a69" />
+            </dir>
+        </target>
+    </contents>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.3.0</min>
+                <max>6.0.0</max>
+            </php>
+        </required>
+    </dependencies>
+</package>

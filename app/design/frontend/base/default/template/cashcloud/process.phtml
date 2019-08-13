@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>CashCloud</title>
+    <link href="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) ?>/skin/frontend/base/default/css/cashcloud.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="logo">
+        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) ?>/skin/frontend/base/default/images/cashcloud/logo.png" alt="CashCloud"/>
+    </div>
+    <div class="desc">
+        Please approve payment in CashCloud app
+    </div>
+    <div class="loader">
+        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB) ?>/skin/frontend/base/default/images/cashcloud/loader.gif" alt="CashCloud"/>
+    </div>
+</div>
+
+<div class="loader"></div>
+<script>
+    setInterval(function(){
+        $.post(window.location.href, {action: "check"}, function(data){
+            if(data.action && data.action == "reload") {
+                location.reload();
+            }
+        });
+        return true;
+    }, 5000)
+</script>
+</body>
+</html>

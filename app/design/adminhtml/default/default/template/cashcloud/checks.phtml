@@ -1,0 +1,13 @@
+<?php
+/**
+ * @var Mage_CashCloud_Adminhtml_Model_Checks $this
+ */
+?>
+<div class="payflow-settings-notice">
+    <strong class="important-label"><?php echo $this->__('Important: ') ?></strong>
+    <?php echo $this->__('To use CashCloud, you must configure your account on the CashCloud website.'); ?>
+    <?php echo $this->__('Once you log into your account, navigate to the Settings and set the options described below') ?>
+    <ul class="options-list">
+        <li><strong><?php echo $this->__('Callback URL') ?>:</strong> <?php echo $this->getCallbackUrl() ?></li>
+    </ul>
+</div>
