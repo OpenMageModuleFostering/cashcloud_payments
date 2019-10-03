@@ -1,16 +1,19 @@
 {
-    "name": "OpenMageModuleFostering/cashcloud_payments",
+    "name": "OpenMageModuleFostering\/cashcloud_payments",
     "type": "magento-module",
     "license": "Creative-Commons-Attribution-4.0-International-License",
     "homepage": "",
     "description": "Cashcloud Payments",
     "authors": [
-    {
-        "name": "cashcloud",
-        "email": "olaf.taupitz@cashcloud.com"
-    }
-],
+        {
+            "name": "cashcloud",
+            "email": "olaf.taupitz@cashcloud.com"
+        }
+    ],
     "suggest": {
-        "magento-hackathon/magento-composer-installer": "*"
-    }
+        "magento-hackathon\/magento-composer-installer": "*"
+    },
+    "keywords": [
+        "openmage-module"
+    ]
 }
